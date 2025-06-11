@@ -16,7 +16,7 @@ func cleanInput(text string) []string {
 
 	re, err := regexp.Compile(`\s+`)
 	if err != nil {
-		fmt.Errorf("Invalid regex: %v", err)
+		fmt.Errorf("Invalid regex: %w", err)
 	}
 	words := re.Split(text, -1)
 

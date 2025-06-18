@@ -13,6 +13,15 @@ func userInput() {
 	for {
 		fmt.Print("Pokedex > ")
 		scanner.Scan()
+		text := scanner.Text()
+
+		wordsList, err := cleanInput(text)
+		if err != nil {
+			fmt.Printf("error formatting input: %w", err)
+			break
+		}
+		firstWord := wordsList[0]
+		fmt.Printf("Your command was: %s", firstWord)
 	}
 }
 

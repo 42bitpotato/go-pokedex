@@ -17,11 +17,11 @@ func userInput() {
 
 		wordsList, err := cleanInput(text)
 		if err != nil {
-			fmt.Printf("error formatting input: %w", err)
+			fmt.Printf("error formatting input: %v", err)
 			break
 		}
 		firstWord := wordsList[0]
-		fmt.Printf("Your command was: %s", firstWord)
+		fmt.Printf("Your command was: %s\n", firstWord)
 	}
 }
 

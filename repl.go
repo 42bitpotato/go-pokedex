@@ -17,8 +17,8 @@ func userInput() {
 
 		wordsList, err := cleanInput(text)
 		if err != nil {
-			fmt.Printf("error formatting input: %v", err)
-			break
+			fmt.Printf("error formatting input: %v\n", err)
+			continue
 		}
 		firstWord := wordsList[0]
 		fmt.Printf("Your command was: %s\n", firstWord)

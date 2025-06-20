@@ -43,7 +43,7 @@ func startRepl() {
 		}
 		err = command.callback()
 		if err != nil {
-			fmt.Printf("error while running command '%s': %v\n", firstWord, err)
+			fmt.Printf("error while running command '%s': %v", firstWord, err)
 		}
 	}
 }

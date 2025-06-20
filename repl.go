@@ -21,8 +21,17 @@ func startRepl() {
 			continue
 		}
 		firstWord := wordsList[0]
-		fmt.Printf("Your command was: %s\n", firstWord)
+
+		if firstWord == "exit" {
+			commandExit()
+		}
 	}
+}
+
+func commandExit() error {
+	fmt.Println("Closing the Pokedex... Goodbye!")
+	os.Exit(0)
+	return nil
 }
 
 func cleanInput(text string) ([]string, error) {

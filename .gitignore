@@ -3,6 +3,8 @@
 #
 # Custom
 go-pokedex
+repl.log
+
 # Binaries for programs and plugins
 *.exe
 *.exe~

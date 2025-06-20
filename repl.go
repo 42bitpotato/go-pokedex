@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func userInput() {
+func startRepl() {
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
 		fmt.Print("Pokedex > ")

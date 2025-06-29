@@ -5,6 +5,6 @@ package main
 // "io"
 
 func commandMap(cfg *config) error {
-	limit := 20
-	offset := limit * *cfg.mapPage
+	limit := cfg.mapLimit
+	offset := limit * cfg.mapPage
 }

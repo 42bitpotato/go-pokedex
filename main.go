@@ -1,9 +1,11 @@
 package main
 
 type config struct {
-	mapPage *int
+	mapPage  int
+	mapLimit int
 }
 
 func main() {
-	startRepl()
+	cfg := &config{}
+	startRepl(cfg)
 }

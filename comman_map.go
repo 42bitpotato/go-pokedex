@@ -35,16 +35,16 @@ func commandMap(cfg *config) error {
 	}
 
 	// Unmarshall json to struct
-	var mapRespons []mapRespons
+	var mapRespons mapRespons
 	if err := json.Unmarshal(data, &mapRespons); err != nil {
 		return fmt.Errorf("failed to unmarshal response: %w", err)
 	}
-	respons := mapRespons[0]
-	for _, area := range respons.Results {
+
+	for _, area := range mapRespons.Results {
 		fmt.Println(area.Name)
 	}
-	cfg.mapNext = respons.Next
-	cfg.mapPrevious = respons.Previous
+	cfg.mapNext = mapRespons.Next
+	cfg.mapPrevious = mapRespons.Previous
 
 	return nil
 }

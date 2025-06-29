@@ -1,11 +1,14 @@
 package main
 
 type config struct {
-	mapPage  int
-	mapLimit int
+	mapNext     string
+	mapPrevious string
 }
 
 func main() {
-	cfg := &config{}
+	cfg := &config{
+		mapNext:     "https://pokeapi.co/api/v2/location-area/?offset=0&limit=20",
+		mapPrevious: "",
+	}
 	startRepl(cfg)
 }

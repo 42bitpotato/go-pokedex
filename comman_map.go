@@ -7,25 +7,19 @@ import (
 	"net/http"
 )
 
-type LocationAreas struct {
+type mapRespons struct {
 	Count    int                   `json:"count"`
 	Next     string                `json:"next"`
 	Previous string                `json:"previous"`
-	Results  []LocationAreasResult `json:"results"`
+	Results  []locationAreasResult `json:"results"`
 }
 
-type LocationAreasResult struct {
+type locationAreasResult struct {
 	Name string `json:"name"`
 }
 
 func commandMap(cfg *config) error {
-	limit := cfg.mapLimit
-	offset := limit * cfg.mapPage
-
-	baseUrl := "https://pokeapi.co/api/v2/location-area/"
-	parameters := fmt.Sprintf("?limit=%d&offset=%d", limit, offset)
-
-	url := fmt.Sprintf("%s%s", baseUrl, parameters)
+	url := cfg.mapNext
 
 	// Get url response
 	res, err := http.Get(url)
@@ -41,13 +35,16 @@ func commandMap(cfg *config) error {
 	}
 
 	// Unmarshall json to struct
-	var locationAreas []LocationAreas
-	if err := json.Unmarshal(data, &locationAreas); err != nil {
+	var mapRespons []mapRespons
+	if err := json.Unmarshal(data, &mapRespons); err != nil {
 		return fmt.Errorf("failed to unmarshal response: %w", err)
 	}
-
-	for _, area := range locationAreas[0].Results {
+	respons := mapRespons[0]
+	for _, area := range respons.Results {
 		fmt.Println(area.Name)
 	}
+	cfg.mapNext = respons.Next
+	cfg.mapPrevious = respons.Previous
+
 	return nil
 }

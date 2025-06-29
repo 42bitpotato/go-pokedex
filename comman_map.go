@@ -20,7 +20,27 @@ type locationAreasResult struct {
 
 func commandMap(cfg *config) error {
 	url := cfg.mapNext
+	err := getRespons(url, cfg)
+	if err != nil {
+		return err
+	}
+	return nil
+}
 
+func commandMapB(cfg *config) error {
+	if cfg.mapPrevious == "" {
+		fmt.Println("You are on first page, cant go back.")
+		return nil
+	}
+	url := cfg.mapNext
+	err := getRespons(url, cfg)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func getRespons(url string, cfg *config) error {
 	// Get url response
 	res, err := http.Get(url)
 	if err != nil {
@@ -43,6 +63,8 @@ func commandMap(cfg *config) error {
 	for _, area := range mapRespons.Results {
 		fmt.Println(area.Name)
 	}
+
+	// Update config struct
 	cfg.mapNext = mapRespons.Next
 	cfg.mapPrevious = mapRespons.Previous
 

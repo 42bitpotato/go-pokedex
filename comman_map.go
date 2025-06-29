@@ -32,7 +32,7 @@ func commandMapB(cfg *config) error {
 		fmt.Println("You are on first page, cant go back.")
 		return nil
 	}
-	url := cfg.mapNext
+	url := cfg.mapPrevious
 	err := getRespons(url, cfg)
 	if err != nil {
 		return err

@@ -1,29 +1,26 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"io"
-	"net/http"
+
+	"github.com/42bitpotato/go-pokedex/internal/pokeapi"
 )
-
-type mapRespons struct {
-	Count    int                   `json:"count"`
-	Next     string                `json:"next"`
-	Previous string                `json:"previous"`
-	Results  []locationAreasResult `json:"results"`
-}
-
-type locationAreasResult struct {
-	Name string `json:"name"`
-}
 
 func commandMap(cfg *config) error {
 	url := cfg.mapNext
-	err := getRespons(url, cfg)
+	areas, err := pokeapi.ListLocations(url)
 	if err != nil {
 		return err
 	}
+
+	for _, area := range areas.Results {
+		fmt.Println(area.Name)
+	}
+
+	// Update config struct
+	cfg.mapNext = areas.Next
+	cfg.mapPrevious = areas.Previous
+
 	return nil
 }
 
@@ -33,40 +30,18 @@ func commandMapB(cfg *config) error {
 		return nil
 	}
 	url := cfg.mapPrevious
-	err := getRespons(url, cfg)
+	areas, err := pokeapi.ListLocations(url)
 	if err != nil {
 		return err
 	}
-	return nil
-}
 
-func getRespons(url string, cfg *config) error {
-	// Get url response
-	res, err := http.Get(url)
-	if err != nil {
-		return fmt.Errorf("failed to fetch location areas: %w", err)
-	}
-
-	//Save response body to variable
-	defer res.Body.Close()
-	data, err := io.ReadAll(res.Body)
-	if err != nil {
-		return fmt.Errorf("failed to read location response: %w", err)
-	}
-
-	// Unmarshall json to struct
-	var mapRespons mapRespons
-	if err := json.Unmarshal(data, &mapRespons); err != nil {
-		return fmt.Errorf("failed to unmarshal response: %w", err)
-	}
-
-	for _, area := range mapRespons.Results {
+	for _, area := range areas.Results {
 		fmt.Println(area.Name)
 	}
 
 	// Update config struct
-	cfg.mapNext = mapRespons.Next
-	cfg.mapPrevious = mapRespons.Previous
+	cfg.mapNext = areas.Next
+	cfg.mapPrevious = areas.Previous
 
 	return nil
 }

@@ -25,4 +25,18 @@ func (c *Cache) Get(key string) (val []byte, ok bool) {
 	return val, ok
 }
 
-func (c *Cache) reapLoop()
+func (c *Cache) reapLoop(interval time.Duration) {
+	for {
+		time.Sleep(interval)
+		if len(c.entries) > 0 {
+			for key, entry := range c.entries {
+				reapTime := entry.createdAt.Add(interval)
+				if time.Now().After(reapTime) {
+					delete(c.entries, key)
+					continue
+				}
+			}
+		}
+		continue
+	}
+}

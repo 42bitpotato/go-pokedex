@@ -5,9 +5,11 @@ import (
 )
 
 type config struct {
-	mapNext       string
-	mapPrevious   string
+	mapNext     string
+	mapPrevious string
+
 	cacheInterval int
+	cache         *pokecache.Cache
 }
 
 func main() {
@@ -16,6 +18,7 @@ func main() {
 		mapPrevious:   "",
 		cacheInterval: 5,
 	}
-	pokecache.NewCache(cfg.cacheInterval)
+
+	cfg.cache = pokecache.NewCache(cfg.cacheInterval)
 	startRepl(cfg)
 }

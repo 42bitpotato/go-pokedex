@@ -3,8 +3,10 @@ package pokecache
 import "time"
 
 func NewCache(interval int) *Cache {
-	cache := &Cache{}
+	cache := &Cache{
+		entries: make(map[string]cacheEntry),
+	}
 	timeInterval := time.Duration(interval) * time.Second
-	cache.reapLoop(timeInterval)
+	go cache.reapLoop(timeInterval)
 	return cache
 }

@@ -1,16 +1,6 @@
 package main
 
-import (
-	"github.com/42bitpotato/go-pokedex/internal/pokecache"
-)
-
-type config struct {
-	mapNext     string
-	mapPrevious string
-
-	cacheInterval int
-	cache         *pokecache.Cache
-}
+import "github.com/42bitpotato/go-pokedex/internal/pokecache"
 
 func main() {
 	cfg := &config{

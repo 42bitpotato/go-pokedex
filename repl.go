@@ -6,7 +6,17 @@ import (
 	"os"
 	"regexp"
 	"strings"
+
+	"github.com/42bitpotato/go-pokedex/internal/pokecache"
 )
+
+type config struct {
+	mapNext     string
+	mapPrevious string
+
+	cacheInterval int
+	cache         *pokecache.Cache
+}
 
 func startRepl(cfg *config) {
 	scanner := bufio.NewScanner(os.Stdin)

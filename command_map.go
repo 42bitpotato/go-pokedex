@@ -8,7 +8,7 @@ import (
 
 func commandMap(cfg *config) error {
 	url := cfg.mapNext
-	areas, err := pokeapi.ListLocations(url)
+	areas, err := pokeapi.ListLocations(url, cfg.cache)
 	if err != nil {
 		return err
 	}
@@ -30,7 +30,7 @@ func commandMapB(cfg *config) error {
 		return nil
 	}
 	url := cfg.mapPrevious
-	areas, err := pokeapi.ListLocations(url)
+	areas, err := pokeapi.ListLocations(url, cfg.cache)
 	if err != nil {
 		return err
 	}

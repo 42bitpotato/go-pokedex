@@ -1,5 +1,9 @@
 package main
 
+import (
+	"github.com/42bitpotato/go-pokedex/internal/pokecache"
+)
+
 type config struct {
 	mapNext       string
 	mapPrevious   string
@@ -12,5 +16,6 @@ func main() {
 		mapPrevious:   "",
 		cacheInterval: 5,
 	}
+	pokecache.NewCache(cfg.cacheInterval)
 	startRepl(cfg)
 }

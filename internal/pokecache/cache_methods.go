@@ -26,17 +26,20 @@ func (c *Cache) Get(key string) (val []byte, ok bool) {
 }
 
 func (c *Cache) reapLoop(interval time.Duration) {
+
+	ticker := time.NewTicker(interval)
+	defer ticker.Stop()
+
 	for {
-		time.Sleep(interval)
-		if len(c.entries) > 0 {
-			for key, entry := range c.entries {
-				reapTime := entry.createdAt.Add(interval)
-				if time.Now().After(reapTime) {
-					delete(c.entries, key)
-					continue
-				}
+		t := <-ticker.C
+		c.mu.Lock()
+		for key, entry := range c.entries {
+
+			reapTime := entry.createdAt.Add(interval)
+			if t.After(reapTime) {
+				delete(c.entries, key)
 			}
 		}
-		continue
+		c.mu.Unlock()
 	}
 }

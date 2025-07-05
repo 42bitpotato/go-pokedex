@@ -2,7 +2,8 @@ package pokecache
 
 import "time"
 
-func NewCache(interval time.Duration) {
+func NewCache(interval int) {
 	var cache Cache
-	cache.reapLoop()
+	timeInterval := time.Duration(interval) * time.Second
+	cache.reapLoop(timeInterval)
 }

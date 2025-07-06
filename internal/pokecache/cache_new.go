@@ -1,6 +1,8 @@
 package pokecache
 
-import "time"
+import (
+	"time"
+)
 
 func NewCache(interval time.Duration) *Cache {
 	cache := &Cache{

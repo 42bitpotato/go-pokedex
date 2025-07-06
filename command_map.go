@@ -6,7 +6,7 @@ import (
 	"github.com/42bitpotato/go-pokedex/internal/pokeapi"
 )
 
-func commandMap(cfg *config) error {
+func commandMap(cfg *config, arg string) error {
 	url := cfg.mapNext
 	areas, err := pokeapi.ListLocations(url, cfg.cache)
 	if err != nil {
@@ -24,7 +24,7 @@ func commandMap(cfg *config) error {
 	return nil
 }
 
-func commandMapB(cfg *config) error {
+func commandMapB(cfg *config, arg string) error {
 	if cfg.mapPrevious == "" {
 		fmt.Println("You are on first page, cant go back.")
 		return nil

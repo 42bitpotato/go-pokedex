@@ -38,7 +38,12 @@ func startRepl(cfg *config) {
 			fmt.Print("Unknown command\n")
 			continue
 		}
-		err = command.callback(cfg)
+
+		arg := ""
+		if len(wordsList) > 1 {
+			arg = wordsList[2]
+		}
+		err = command.callback(cfg, arg)
 		if err != nil {
 			fmt.Printf("error while running command '%s': %v\n", firstWord, err)
 		}
@@ -53,7 +58,7 @@ func cleanInput(text string) ([]string, error) {
 		return nil, fmt.Errorf("input is blank or only whitespace")
 	}
 	// Check if non-alphanumeric
-	reAlpha := regexp.MustCompile(`^[A-Za-z\s]+$`)
+	reAlpha := regexp.MustCompile(`^[A-Za-z\s-]+$`)
 	if !reAlpha.MatchString(text) {
 		return nil, fmt.Errorf("input containing non-alphanumeric characters: %s", text)
 	}
@@ -72,7 +77,7 @@ func cleanInput(text string) ([]string, error) {
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(cfg *config) error
+	callback    func(cfg *config, arg string) error
 }
 
 func getCommands() map[string]cliCommand {
@@ -96,6 +101,11 @@ func getCommands() map[string]cliCommand {
 			name:        "mapb",
 			description: "Display previous page with names of 20 location areas in the Pokemon world",
 			callback:    commandMapB,
+		},
+		"explore": {
+			name:        "explore",
+			description: "Takes the name of a location area as an argument and returns a list of all the Pokémon located there.",
+			callback:    commandExplore,
 		},
 	}
 }

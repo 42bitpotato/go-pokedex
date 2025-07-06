@@ -59,7 +59,7 @@ func cleanInput(text string) ([]string, error) {
 		return nil, fmt.Errorf("input is blank or only whitespace")
 	}
 	// Check if non-alphanumeric
-	reAlpha := regexp.MustCompile(`^[A-Za-z\s-]+$`)
+	reAlpha := regexp.MustCompile(`^[A-Za-z0-9\s-]+$`)
 	if !reAlpha.MatchString(text) {
 		return nil, fmt.Errorf("input containing non-alphanumeric characters: %s", text)
 	}

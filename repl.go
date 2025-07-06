@@ -6,6 +6,7 @@ import (
 	"os"
 	"regexp"
 	"strings"
+	"time"
 
 	"github.com/42bitpotato/go-pokedex/internal/pokecache"
 )
@@ -14,7 +15,7 @@ type config struct {
 	mapNext     string
 	mapPrevious string
 
-	cacheInterval int
+	cacheInterval time.Duration
 	cache         *pokecache.Cache
 }
 

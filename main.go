@@ -8,6 +8,7 @@ import (
 
 func main() {
 	cfg := &config{
+		baseUrl:       "https://pokeapi.co/api/v2/",
 		mapNext:       "https://pokeapi.co/api/v2/location-area/?offset=0&limit=20",
 		mapPrevious:   "",
 		cacheInterval: 5 * time.Second,

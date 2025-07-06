@@ -12,6 +12,7 @@ import (
 )
 
 type config struct {
+	baseUrl     string
 	mapNext     string
 	mapPrevious string
 

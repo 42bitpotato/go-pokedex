@@ -10,3 +10,12 @@ type mapRespons struct {
 type locationAreasResult struct {
 	Name string `json:"name"`
 }
+
+type LocationEncounters struct {
+	Name       string `json:"name"`
+	Encounters []struct {
+		Pokemon struct {
+			Name string `json:"name"`
+		} `json:"pokemon"`
+	} `json:"pokemon_encounters"`
+}

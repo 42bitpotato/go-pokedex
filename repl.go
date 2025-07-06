@@ -42,7 +42,7 @@ func startRepl(cfg *config) {
 
 		arg := ""
 		if len(wordsList) > 1 {
-			arg = wordsList[2]
+			arg = wordsList[1]
 		}
 		err = command.callback(cfg, arg)
 		if err != nil {

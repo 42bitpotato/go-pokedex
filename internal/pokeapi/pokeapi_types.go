@@ -19,3 +19,17 @@ type LocationEncounters struct {
 		} `json:"pokemon"`
 	} `json:"pokemon_encounters"`
 }
+
+type PokemonInfo struct {
+	ID      string `json:"id"`
+	Name    string `json:"name"`
+	BaseExp string `json:"base_experience"`
+	Height  string `json:"height"`
+	Weight  string `json:"weight"`
+	Forms   []struct {
+		Name string `json:"name"`
+	} `json:"forms"`
+	Species struct {
+		Name string `json:"name"`
+	} `json:"species"`
+}

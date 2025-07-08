@@ -8,11 +8,11 @@ import (
 
 func commandExplore(cfg *config, arg string) error {
 	url := fmt.Sprintf("%slocation-area/%s/", cfg.baseUrl, arg)
-	pokemonJson, err := pokeapi.ListPokemon(url, cfg.cache)
+	encountersJson, err := pokeapi.ListPokemon(url, cfg.cache)
 	if err != nil {
 		return err
 	}
-	encounters := pokemonJson.Encounters
+	encounters := encountersJson.Encounters
 	for _, val := range encounters {
 		name := val.Pokemon.Name
 		fmt.Println(name)

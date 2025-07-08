@@ -8,7 +8,7 @@ import (
 
 func commandExplore(cfg *config, arg string) error {
 	url := fmt.Sprintf("%slocation-area/%s/", cfg.baseUrl, arg)
-	encountersJson, err := pokeapi.ListPokemon(url, cfg.cache)
+	encountersJson, err := pokeapi.ListEncounters(url, cfg.cache)
 	if err != nil {
 		return err
 	}

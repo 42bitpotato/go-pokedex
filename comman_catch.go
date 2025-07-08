@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"time"
 
 	"github.com/42bitpotato/go-pokedex/internal/pokeapi"
 )
@@ -15,6 +16,7 @@ func commandCatch(cfg *config, arg string) error {
 	}
 
 	fmt.Printf("Throwing a Pokeball at %s...\n", pokemon.Name)
+	time.Sleep(2 * time.Second)
 	successCatch := catchChance(pokemon.BaseExp)
 	if !successCatch {
 		fmt.Printf("%s escaped!\n", pokemon.Name)
@@ -26,7 +28,7 @@ func commandCatch(cfg *config, arg string) error {
 }
 
 func catchChance(baseExp int) bool {
-	randNr := rand.Intn(baseExp)
-	successLimit := (baseExp * 75) / 100
-	return randNr > successLimit
+	chance := (baseExp / 100) + 1
+	randNr := rand.Intn(chance * 2)
+	return randNr < 2
 }

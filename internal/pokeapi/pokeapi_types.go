@@ -21,11 +21,11 @@ type LocationEncounters struct {
 }
 
 type PokemonInfo struct {
-	ID      string `json:"id"`
+	ID      int    `json:"id"`
 	Name    string `json:"name"`
-	BaseExp string `json:"base_experience"`
-	Height  string `json:"height"`
-	Weight  string `json:"weight"`
+	BaseExp int    `json:"base_experience"`
+	Height  int    `json:"height"`
+	Weight  int    `json:"weight"`
 	Forms   []struct {
 		Name string `json:"name"`
 	} `json:"forms"`

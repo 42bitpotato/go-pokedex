@@ -20,15 +20,13 @@ func commandCatch(cfg *config, arg string) error {
 		fmt.Printf("%s escaped!", pokemon.Name)
 		return nil
 	}
-
+	fmt.Printf("%s was caught!", pokemon.Name)
+	cfg.caughtPokemon[pokemon.Name] = pokemon
 	return nil
 }
 
 func catchChance(baseExp int) bool {
 	randNr := rand.Intn(baseExp)
 	successLimit := (baseExp * 75) / 100
-	if randNr > successLimit {
-		return false
-	}
-	return true
+	return randNr > successLimit
 }

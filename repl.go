@@ -8,6 +8,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/42bitpotato/go-pokedex/internal/pokeapi"
 	"github.com/42bitpotato/go-pokedex/internal/pokecache"
 )
 
@@ -15,6 +16,8 @@ type config struct {
 	baseUrl     string
 	mapNext     string
 	mapPrevious string
+
+	caughtPokemon map[string]pokeapi.PokemonInfo
 
 	cacheInterval time.Duration
 	cache         *pokecache.Cache
